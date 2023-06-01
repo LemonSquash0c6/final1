@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #header {
+      background-color: #ff3b93;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-family: "Rockwell";
+    }
+    #table-container {
+      margin: 20px;
+      text-align: center;
+
+
+    }
+    table {
+      border-collapse: collapse;
+      margin: 0 auto;
+      width: 80%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #0028a1;
+      color: #fff;
+    }
+    .chart-container {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+    }
+
+    .close-button {
+      margin-top: 0px;
+      background-color: #F2CD5C;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease;
+      width: 40%;
+      border: none;
+    }
+    .chart-button {
+      margin-top: 0px;
+      background-color: #F2CD5C;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease;
+      width: 40%;
+      border: none;
+
+
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>Admin Dashboard</h1>
+  </div>
+  <div id="table-container">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Actions</th>
+      </tr>
+      {% for item in query_res %}
+      <tr>
+        <td>{{item.uid}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td><button class="chart-button">View Chart</button>
+          <div class="chart-container">
+            <canvas id="chart"></canvas>
+            <button class="close-button">Close Chart</button>
+          </div></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      var chart;
+
+      // Function to show the chart pop-up
+      function showChart() {
+        var chartContainer = this.nextElementSibling;
+        chartContainer.style.display = 'block';
+        var canvas = chartContainer.querySelector('#chart');
+        canvas.width = 600;
+        canvas.height = 400;
+
+        var ctx = chartContainer.querySelector('#chart').getContext('2d');
+        chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            datasets: [{
+              label: 'Analysis',
+              data: [20,13,34,5,23,23],
+              backgroundColor: "rgba(255, 99, 132, 0.2)",
+              borderColor: "purple",
+              borderWidth: 2,
+            }]
+          },
+          options: {}
+        });
+      }
+
+      // Function to hide the chart pop-up
+      function hideChart() {
+        var chartContainer = this.parentNode;
+        chartContainer.style.display = 'none';
+
+        // Destroy the chart instance
+        chart.destroy();
+      }
+
+      // Add event listeners to all chart buttons
+      var chartButtons = document.getElementsByClassName('chart-button');
+      for (var i = 0; i < chartButtons.length; i++) {
+        chartButtons[i].addEventListener('click', showChart);
+      }
+
+      // Add event listeners to all close buttons
+      var closeButtons = document.getElementsByClassName('close-button');
+      for (var i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].addEventListener('click', hideChart);
+      }
+    </script>
+
+</body>
+</html>

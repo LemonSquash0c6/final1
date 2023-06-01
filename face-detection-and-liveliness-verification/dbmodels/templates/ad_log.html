@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+body {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background-size: 2000px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Console";
+
+}
+
+.container {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  margin: 50px auto;
+  max-width: 400px;
+  padding: 30px;
+}
+
+h1 {
+  color: #F2CD5C;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h4 {
+  color: #FAEAB1;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+label {
+  color: #F2CD5C;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="password"] {
+  border: solid;
+  border-color: #F2CD5C;
+  border-width: 10px;
+  border-radius: 100px;
+  border-bottom: 2px solid #ccc;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 95%;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-bottom: 2px solid #333;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: #F2CD5C;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  width: 50%;
+  margin-left: 25%;
+}
+
+button[type="submit"]:hover {
+  background-color: #FAEAB1;
+}
+
+.button-back {
+  display: inline-block;
+  background-color: #F4B183;
+  border: none;
+  margin-right: 600px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.button-back:hover {
+  background-color: #DFA67B;
+}
+
+
+.button-add {
+  display: inline-block;
+  background-color: #1B9C85;
+  border: none;
+  margin-right: 600px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.button-add:hover {
+  background-color: #3e8e41;
+}
+
+.button-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #3b426a;
+  padding: 20px;
+  text-align: center;
+}
+
+
+
+      </style>
+</head>
+<body>
+<div class="container">
+<form action="/admin_dash/" method="post">{%csrf_token%}
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+</form>
+</div>
+</body>
+</html>

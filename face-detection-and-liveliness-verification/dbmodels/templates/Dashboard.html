@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #dashboard {
+      display: flex;
+      flex-direction: row;
+    }
+    #user-details {
+      flex: 1;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    #user-details h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+    #user-details p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    #user-details ul {
+      list-style: none;
+      padding: 0;
+    }
+    #user-details li {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    #graph {
+      flex: 2;
+      padding: 20px;
+      background-color: #fff;
+    }
+    #graph h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+    .punch {
+      font-family: Arial, sans-serif;
+      text-align: right;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin: 20px;
+      background-color:#ffffff;
+      color: white;
+      border: solid;
+      border-color: #9000ff;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button:hover {
+      background-color: #F2CD5C;
+    }
+    .table {
+      border:3px;
+      padding:20px;
+    }
+    .login {
+      float: left;
+    }
+    .logout {
+      float: right;
+    }
+    .navbar {
+  overflow: hidden;
+  background-color: #ff3b93;
+
+}
+.butt{
+    float: right;
+}
+.x{
+    float: left;
+    color: #ffffff;
+    margin-left: 30px;
+    font-family: "Rockwell";
+    margin-top: 27px;
+}
+
+  </style>
+</head>
+<body>
+    <div class="navbar">
+    <h1 class="x">User Dashboard</h1>
+    <div class="butt">
+        <button  id="punch-in"><a style="text-decoration: none;" href="punchin/">Punch In</a></button>
+        <button id="punch-out"><a style="text-decoration: none;" href="punchout/">Punch Out</a></button>
+    </div>
+
+    </div>
+
+  <div id="dashboard">
+    <div id="user-details">
+      <h2>User Details</h2>
+      {% for item in mymembers %}
+      <ol style = "list-style-type: none;">
+        <li><strong>ID : </strong> <tr><td>{{item.uid}}</td></tr></li>
+        <li><strong>NAME : </strong> <tr><td>{{item.name}}</td></tr></li>
+        <li><strong>E-MAIL : </strong> <tr><td>{{item.email}}</td></tr></li>
+        <li><strong>CONTACT : </strong> <tr><td>{{item.phone}}</td></tr></li>
+      </ol>
+      {% endfor %}
+
+
+      <br>
+
+      <div class="table">
+        <div class="login">
+        <tr>
+          <td>LOGIN</td>
+        </tr>
+        <br>
+        {% for item in members1 %}
+          <tr>
+            <td>{{item.plogin}}</td>
+          </tr><br>
+        {% endfor %}
+      </div>
+
+
+      <div class="logout">
+        <tr>
+          <td>LOGOUT</td>
+        </tr>
+        <br>
+        {% for item in members2 %}
+          <tr>
+            <td>{{item.plogout}}</td>
+          </tr><br>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+  <div id="graph">
+    <h2>Line Chart</h2>
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script>
+    // Set up the data for the line chart
+    var data = {
+      labels: ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"],
+      datasets: [{
+        label: "Sales",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "purple",
+        borderWidth: 2,
+        barPercentage: 0.6,
+        categoryPercentage: 0.6,
+        data: [10, 20, 30, 25, 15, 35],
+      }]
+    };
+
+    // Set up the options for the line chart
+    var options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    };
+
+    // Create the line chart
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myLineChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: options
+    });
+  </script>
+
+
+</body>
+</html>
